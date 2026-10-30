@@ -26,6 +26,10 @@ lerna-debug.log*
 # Local files
 *.local
 
+# Uploads
+uploads/
+backend/uploads/
+
 # Editor settings
 .vscode/*
 !.vscode/extensions.json
