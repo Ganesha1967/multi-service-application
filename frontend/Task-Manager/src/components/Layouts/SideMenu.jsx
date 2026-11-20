@@ -30,7 +30,7 @@
 //     }
 //     return () => {};
 //   }, [user]);
-  
+
 //   return <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 sticky top-[61px] z-20">
 //     <div className="flex flex-col items-center justify-center mb-7 pt-5">
 //       <div className="relative">
@@ -73,12 +73,11 @@
 
 // export default SideMenu;
 
-
-import React, { useContext, useEffect, useState } from "react";
-import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from "../../utils/data";
-import { UserContext } from "../../context/userContext";
-import { useNavigate } from "react-router-dom";
-import { LuLogOut } from "react-icons/lu"; // Иконка для выхода (если используете react-icons)
+import React, { useContext, useEffect, useState } from 'react';
+import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from '../../utils/data';
+import { UserContext } from '../../context/userContext';
+import { useNavigate } from 'react-router-dom';
+import { LuLogOut } from 'react-icons/lu'; // Иконка для выхода (если используете react-icons)
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
@@ -86,7 +85,7 @@ const SideMenu = ({ activeMenu }) => {
   const navigate = useNavigate();
 
   const handleClick = (route) => {
-    if (route === "logout") {
+    if (route === 'logout') {
       handleLogout();
       return;
     }
@@ -96,22 +95,24 @@ const SideMenu = ({ activeMenu }) => {
   const handleLogout = () => {
     localStorage.clear();
     clearUser();
-    navigate("/login");
+    navigate('/login');
   };
 
   useEffect(() => {
     if (user) {
-      setSideMenuData(user?.role === "admin" ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA);
+      setSideMenuData(
+        user?.role === 'admin' ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA
+      );
     }
   }, [user]);
 
   // Генерация инициалов для заглушки аватарки
   const getInitials = (name) => {
-    if (!name) return "?";
+    if (!name) return '?';
     return name
-      .split(" ")
+      .split(' ')
       .map((n) => n[0])
-      .join("")
+      .join('')
       .toUpperCase()
       .substring(0, 2);
   };
@@ -136,17 +137,17 @@ const SideMenu = ({ activeMenu }) => {
           </div>
         </div>
 
-        {user?.role === "admin" && (
+        {user?.role === 'admin' && (
           <div className="text-[10px] font-bold tracking-wider uppercase text-white bg-indigo-500 px-3 py-1 rounded-full mt-3 shadow-sm shadow-indigo-500/30">
             Admin
           </div>
         )}
 
         <h5 className="text-gray-900 font-semibold text-lg leading-6 mt-3 truncate w-full text-center">
-          {user?.name || "Guest"}
+          {user?.name || 'Guest'}
         </h5>
         <p className="text-[12px] text-gray-500 truncate w-full text-center">
-          {user?.email || "no-email@example.com"}
+          {user?.email || 'no-email@example.com'}
         </p>
       </div>
 
@@ -160,18 +161,20 @@ const SideMenu = ({ activeMenu }) => {
               className={`w-full flex items-center gap-4 text-[15px] font-medium px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer group
                 ${
                   isActive
-                    ? "bg-primary/5 text-primary shadow-sm"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    ? 'bg-primary/5 text-primary shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               onClick={() => handleClick(item.path)}
             >
               <item.icon
                 className={`text-xl transition-colors ${
-                  isActive ? "text-primary" : "text-gray-400 group-hover:text-gray-600"
+                  isActive
+                    ? 'text-primary'
+                    : 'text-gray-400 group-hover:text-gray-600'
                 }`}
               />
               <span className="flex-1 text-left">{item.label}</span>
-              
+
               {/* Индикатор активной страницы (полоска справа) */}
               {isActive && (
                 <div className="w-1 h-6 bg-primary rounded-full shadow-sm shadow-primary/50"></div>

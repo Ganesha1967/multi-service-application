@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   BarChart,
   Bar,
@@ -9,24 +9,23 @@ import {
   Legend,
   ResponsiveContainer,
   Cell,
-} from "recharts";
+} from 'recharts';
 
-const CustomBarChart = ({data}) => {
-
+const CustomBarChart = ({ data }) => {
   // Function to alternate colors
   const getBarColor = (entry) => {
     switch (entry?.priority) {
       case 'Low':
-        return '#00BC7D'
+        return '#00BC7D';
 
       case 'Medium':
-        return '#FE9900'
+        return '#FE9900';
 
       case 'High':
-        return '#FF1F57'
+        return '#FF1F57';
 
       default:
-        return '#00BC7D'
+        return '#00BC7D';
     }
   };
 
@@ -38,7 +37,7 @@ const CustomBarChart = ({data}) => {
             {payload[0].payload.priority}
           </p>
           <p className="text-sm text-gray-600">
-            Count:{" "}
+            Count:{' '}
             <span className="text-sm font-medium text-gray-900">
               {payload[0].payload.count}
             </span>
@@ -57,20 +56,23 @@ const CustomBarChart = ({data}) => {
 
           <XAxis
             dataKey="priority"
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: '#555' }}
             stroke="none"
           />
-          <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
+          <YAxis tick={{ fontSize: 12, fill: '#555' }} stroke="none" />
 
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={{ fill: 'transparent' }}
+          />
 
           <Bar
             dataKey="count"
             nameKey="priority"
             fill="#FF8042"
             radius={[10, 10, 0, 0]}
-            activeDot={{ r: 8, fill: "yellow" }}
-            activeStyle={{ fill: "green" }}
+            activeDot={{ r: 8, fill: 'yellow' }}
+            activeStyle={{ fill: 'green' }}
           >
             {data.map((entry, index) => (
               <Cell key={index} fill={getBarColor(entry)} />
@@ -79,7 +81,7 @@ const CustomBarChart = ({data}) => {
         </BarChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};
 
-export default CustomBarChart
+export default CustomBarChart;

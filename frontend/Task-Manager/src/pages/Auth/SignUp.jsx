@@ -1,24 +1,24 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import AuthLayout from "../../components/Layouts/AuthLayout";
-import { validateEmail, validatePassword } from "../../utils/helper";
-import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
-import Input from "../../components/Inputs/Input";
-import { UserContext } from "../../context/userContext";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
-import uploadImage from "../../utils/uploadImage";
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthLayout from '../../components/Layouts/AuthLayout';
+import { validateEmail, validatePassword } from '../../utils/helper';
+import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
+import Input from '../../components/Inputs/Input';
+import { UserContext } from '../../context/userContext';
+import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import uploadImage from '../../utils/uploadImage';
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [adminInviteToken, setAdminInviteToken] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [adminInviteToken, setAdminInviteToken] = useState('');
 
   const [error, setError] = useState(null);
 
-  const {updateUser} = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   // handle SignUp from submit
@@ -28,29 +28,28 @@ const SignUp = () => {
     let profileImageUrl = '';
 
     if (!fullName) {
-      setError("Please enter full name.");
+      setError('Please enter full name.');
       return;
     }
-      
+
     if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
+      setError('Please enter a valid email address.');
       return;
     }
 
     if (!validatePassword(password)) {
-      setError("Password must be 8+ chars, with number & special char.");
+      setError('Password must be 8+ chars, with number & special char.');
       return;
     }
 
-    setError("");
-  
+    setError('');
+
     //SignUp API Call
     try {
-
       // Upload image if present
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imgUploadRes.imageUrl || "";
+        profileImageUrl = imgUploadRes.imageUrl || '';
       }
 
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
@@ -58,27 +57,27 @@ const SignUp = () => {
         email,
         password,
         profileImageUrl,
-        adminInviteToken
+        adminInviteToken,
       });
 
       const { token, role } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         updateUser(response.data);
 
         //Redirect based on role
-        if (role === "admin") {
-          navigate("/admin/dashboard");
+        if (role === 'admin') {
+          navigate('/admin/dashboard');
         } else {
-          navigate("/user/dashboard");
+          navigate('/user/dashboard');
         }
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
       } else {
-        setError("Something went wrong. Please try again.");
+        setError('Something went wrong. Please try again.');
       }
     }
   };
@@ -86,14 +85,16 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className="w-full">
-        <h2 className="text-2xl font-bold text-slate-900 mb-1">Create an Account</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-1">
+          Create an Account
+        </h2>
         <p className="text-sm text-slate-500 mb-6">
           Join us today by entering your details below.
         </p>
 
         <form onSubmit={handleSignUp}>
           <div className="flex justify-center mb-6">
-             <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+            <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
@@ -139,16 +140,19 @@ const SignUp = () => {
             </div>
           )}
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full text-base font-bold text-white bg-indigo-500 hover:bg-indigo-600 shadow-lg shadow-indigo-500/30 py-4 rounded-xl mt-2 mb-2 active:scale-[0.98] transition-all cursor-pointer"
           >
             SIGN UP
           </button>
 
           <p className="text-sm text-slate-600 text-center mt-6">
-            Already have an account?{" "}
-            <Link className="font-semibold text-indigo-400 hover:underline" to="/login">
+            Already have an account?{' '}
+            <Link
+              className="font-semibold text-indigo-400 hover:underline"
+              to="/login"
+            >
               Login
             </Link>
           </p>

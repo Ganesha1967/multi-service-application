@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { HiMiniPlus, HiOutlineTrash } from "react-icons/hi2";
-import { LuPaperclip } from "react-icons/lu";
+import { HiMiniPlus, HiOutlineTrash } from 'react-icons/hi2';
+import { LuPaperclip } from 'react-icons/lu';
 
 const AddAttachmentsInput = ({ attachments, setAttachments }) => {
-  const [option, setOption] = useState("");
+  const [option, setOption] = useState('');
 
   // Function to handle adding an option
   const handleAddOption = () => {
     if (option.trim()) {
       setAttachments([...attachments, option.trim()]);
-      setOption("");
+      setOption('');
     }
   };
 
@@ -60,7 +60,7 @@ const AddAttachmentsInput = ({ attachments, setAttachments }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddAttachmentsInput
+export default AddAttachmentsInput;

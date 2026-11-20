@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const DeleteAlert = ({ content, onDelete }) => {
   return (
@@ -15,7 +15,7 @@ const DeleteAlert = ({ content, onDelete }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DeleteAlert
+export default DeleteAlert;

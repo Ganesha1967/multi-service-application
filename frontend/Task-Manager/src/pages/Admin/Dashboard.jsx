@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useUserAuth } from "../../hooks/useUserAuth";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
-import { useNavigate } from "react-router-dom";
-import { API_PATHS } from "../../utils/apiPaths";
-import axiosInstance from "../../utils/axiosInstance";
+import React, { useEffect, useState } from 'react';
+import { useUserAuth } from '../../hooks/useUserAuth';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
+import { useNavigate } from 'react-router-dom';
+import { API_PATHS } from '../../utils/apiPaths';
+import axiosInstance from '../../utils/axiosInstance';
 import moment from 'moment';
-import InfoCard from "../../components/Cards/InfoCard";
-import { addThousandsSeparator } from "../../utils/helper";
-import { LuArrowRight } from "react-icons/lu";
-import TaskListTable from "../../components/TaskListTable";
-import CustomPieChart from "../../components/Charts/CustomPieChart";
-import CustomBarChart from "../../components/Charts/CustomBarChart";
-import DashboardLayout from "../../components/Layouts/DashboardLayout";
+import InfoCard from '../../components/Cards/InfoCard';
+import { addThousandsSeparator } from '../../utils/helper';
+import { LuArrowRight } from 'react-icons/lu';
+import TaskListTable from '../../components/TaskListTable';
+import CustomPieChart from '../../components/Charts/CustomPieChart';
+import CustomBarChart from '../../components/Charts/CustomBarChart';
+import DashboardLayout from '../../components/Layouts/DashboardLayout';
 
-const COLORS = ["#8D51FF", "#00B8DB", "#78CE00"];
+const COLORS = ['#8D51FF', '#00B8DB', '#78CE00'];
 
 const Dashboard = () => {
   useUserAuth();
@@ -33,17 +33,17 @@ const Dashboard = () => {
     const taskPriorityLevels = data?.taskPriorityLevels || null;
 
     const taskDistributionData = [
-      { status: "Pending", count: taskDistribution?.Pending || 0 },
-      { status: "In Progress", count: taskDistribution?.InProgress || 0 },
-      { status: "Completed", count: taskDistribution?.Completed || 0 },
+      { status: 'Pending', count: taskDistribution?.Pending || 0 },
+      { status: 'In Progress', count: taskDistribution?.InProgress || 0 },
+      { status: 'Completed', count: taskDistribution?.Completed || 0 },
     ];
 
     setPieChartData(taskDistributionData);
 
     const PriorityLevelData = [
-      { priority: "Low", count: taskPriorityLevels?.Low || 0 },
-      { priority: "Medium", count: taskPriorityLevels?.Medium || 0 },
-      { priority: "High", count: taskPriorityLevels?.High || 0 },
+      { priority: 'Low', count: taskPriorityLevels?.Low || 0 },
+      { priority: 'Medium', count: taskPriorityLevels?.Medium || 0 },
+      { priority: 'High', count: taskPriorityLevels?.High || 0 },
     ];
 
     setBarChartData(PriorityLevelData);
@@ -59,11 +59,11 @@ const Dashboard = () => {
         prepareChartData(response.data?.charts || null);
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error('Error fetching users:', error);
     }
   };
 
-  const onSeeMore = ()=>{
+  const onSeeMore = () => {
     navigate('/admin/tasks');
   };
 
@@ -81,7 +81,7 @@ const Dashboard = () => {
           <div className="col-span-3">
             <h2 className="text-xl md:text-2xl">Good Morning, {user?.name}!</h2>
             <p className="text-xs md:text-[13px] text-gray-400 mt-1.5">
-              {moment().format("dddd Do MMM YYYY")}
+              {moment().format('dddd Do MMM YYYY')}
             </p>
           </div>
         </div>
@@ -124,18 +124,13 @@ const Dashboard = () => {
 
       {/* Table of recent tasks */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
-
-
         <div>
           <div className="card">
             <div className="flex items-center justify-between">
               <h5 className="font-medium">Task Distribution</h5>
             </div>
 
-            <CustomPieChart
-              data={pieChartData}
-              colors={COLORS}
-            />
+            <CustomPieChart data={pieChartData} colors={COLORS} />
           </div>
         </div>
 
@@ -145,12 +140,9 @@ const Dashboard = () => {
               <h5 className="font-medium">Task Priority Levels</h5>
             </div>
 
-            <CustomBarChart
-              data={barChartData}
-            />
+            <CustomBarChart data={barChartData} />
           </div>
         </div>
-
 
         <div className="md:col-span-2">
           <div className="card">

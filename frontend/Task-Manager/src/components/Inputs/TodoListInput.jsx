@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { HiMiniPlus, HiOutlineTrash } from "react-icons/hi2";
+import React, { useState } from 'react';
+import { HiMiniPlus, HiOutlineTrash } from 'react-icons/hi2';
 
-const TodoListInput = ({todoList, setTodoList}) => {
-  const [option, setOption] = useState("");
+const TodoListInput = ({ todoList, setTodoList }) => {
+  const [option, setOption] = useState('');
 
   // Function to handle adding an option
   const handleAddOption = () => {
     if (option.trim()) {
       setTodoList([...todoList, option.trim()]);
-      setOption("");
+      setOption('');
     }
   };
 
@@ -57,7 +57,7 @@ const TodoListInput = ({todoList, setTodoList}) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TodoListInput
+export default TodoListInput;

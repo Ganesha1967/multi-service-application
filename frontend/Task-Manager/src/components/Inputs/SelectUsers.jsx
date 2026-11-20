@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
-import Modal from "../Modal";
-import { LuUsers } from "react-icons/lu";
-import AvatarGroup from "../AvatarGroup";
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import Modal from '../Modal';
+import { LuUsers } from 'react-icons/lu';
+import AvatarGroup from '../AvatarGroup';
 
 const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
   const [allUsers, setAllUsers] = useState([]);
@@ -17,7 +17,7 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
         setAllUsers(response.data);
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error('Error fetching users:', error);
     }
   };
 
@@ -48,7 +48,7 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
     }
     return () => {};
   }, [selectedUsers]);
-  
+
   return (
     <div className="space-y-4 mt-2">
       {selectedUserAvatars.length === 0 && (
@@ -56,14 +56,12 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
           <LuUsers className="text-sm" /> Add Members
         </button>
       )}
-      
+
       {selectedUserAvatars.length > 0 && (
         <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
           <AvatarGroup avatars={selectedUserAvatars} maxVisible={3} />
         </div>
       )}
-
-
 
       <Modal
         isOpen={isModalOpen}
@@ -98,17 +96,14 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
           ))}
         </div>
 
-
         <div className="flex justify-end gap-4 pt-4">
-            <button className="card-btn" onClick={() => setIsModalOpen(false)}>
-              CANCEL
-            </button>
-            <button className="card-btn-fill" onClick={handleAssign}>
-              DONE
-            </button>
+          <button className="card-btn" onClick={() => setIsModalOpen(false)}>
+            CANCEL
+          </button>
+          <button className="card-btn-fill" onClick={handleAssign}>
+            DONE
+          </button>
         </div>
-
-
       </Modal>
     </div>
   );

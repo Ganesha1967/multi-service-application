@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const UserCard = ({ userInfo }) => {
   return (
@@ -40,20 +40,20 @@ const UserCard = ({ userInfo }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const StatCard = ({ label, count, status }) => {
   const getStatusTagColor = () => {
     switch (status) {
-      case "In Progress":
-        return "text-cyan-500 bg-gray-50";
+      case 'In Progress':
+        return 'text-cyan-500 bg-gray-50';
 
-      case "Completed":
-        return "text-indigo-500 bg-gray-50";
+      case 'Completed':
+        return 'text-indigo-500 bg-gray-50';
 
       default:
-        return "text-violet-500 bg-gray-50";
+        return 'text-violet-500 bg-gray-50';
     }
   };
 
@@ -63,7 +63,7 @@ const StatCard = ({ label, count, status }) => {
     >
       <span className="text-[12px] font-semibold">{count}</span> <br /> {label}
     </div>
-  )
-}
+  );
+};
 
-export default UserCard
+export default UserCard;

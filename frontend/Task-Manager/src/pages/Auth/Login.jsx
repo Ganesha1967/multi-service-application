@@ -1,18 +1,18 @@
-import AuthLayout from "../../components/Layouts/AuthLayout";
-import { useContext, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import Input from "../../components/Inputs/Input";
-import { validateEmail } from "../../utils/helper";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
-import { UserContext } from "../../context/userContext";
+import AuthLayout from '../../components/Layouts/AuthLayout';
+import { useContext, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import Input from '../../components/Inputs/Input';
+import { validateEmail } from '../../utils/helper';
+import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const {updateUser} = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   // Handle Login Form Submit
@@ -20,15 +20,15 @@ const Login = () => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
+      setError('Please enter a valid email address.');
       return;
     }
     if (!password) {
-      setError("Please enter your password.");
+      setError('Please enter your password.');
       return;
     }
-    
-    setError("");
+
+    setError('');
 
     // Login API Call
     try {
@@ -40,21 +40,21 @@ const Login = () => {
       const { token, role } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         updateUser(response.data);
 
         // Redirect based on role
-        if (role === "admin") {
-          navigate("/admin/dashboard");
+        if (role === 'admin') {
+          navigate('/admin/dashboard');
         } else {
-          navigate("/user/dashboard");
+          navigate('/user/dashboard');
         }
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
       } else {
-        setError("Something went wrong. Please try again.");
+        setError('Something went wrong. Please try again.');
       }
     }
   };
@@ -90,16 +90,19 @@ const Login = () => {
             </div>
           )}
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full text-base font-bold text-white bg-indigo-500 hover:bg-indigo-600 shadow-lg shadow-indigo-500/30 py-4 rounded-xl mt-2 mb-2 active:scale-[0.98] transition-all cursor-pointer"
           >
             LOGIN
           </button>
 
           <p className="text-sm text-slate-600 text-center mt-6">
-            Don't have an account?{" "}
-            <Link className="font-semibold text-indigo-400 hover:underline" to="/signup">
+            Don't have an account?{' '}
+            <Link
+              className="font-semibold text-indigo-400 hover:underline"
+              to="/signup"
+            >
               Sign up
             </Link>
           </p>

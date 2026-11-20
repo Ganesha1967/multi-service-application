@@ -2,11 +2,11 @@ import React from 'react';
 import {
   PieChart,
   Pie,
-  Cell,    // 'Cell' is deprecated!!!
+  Cell, // 'Cell' is deprecated!!!
   Tooltip,
   ResponsiveContainer,
   Legend,
-} from "recharts";
+} from 'recharts';
 import CustomTooltip from './CustomTooltip';
 import CustomLegend from './CustomLegent';
 

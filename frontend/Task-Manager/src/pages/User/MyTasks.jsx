@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import DashboardLayout from "../../components/Layouts/DashboardLayout";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
-import { LuFileSpreadsheet } from "react-icons/lu";
-import TaskStatusTabs from "../../components/TaskStatusTabs";
-import TaskCard from "../../components/Cards/TaskCard";
-import { toast } from "react-hot-toast";
+import React, { useEffect, useState } from 'react';
+import DashboardLayout from '../../components/Layouts/DashboardLayout';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { LuFileSpreadsheet } from 'react-icons/lu';
+import TaskStatusTabs from '../../components/TaskStatusTabs';
+import TaskCard from '../../components/Cards/TaskCard';
+import { toast } from 'react-hot-toast';
 
 const MyTasks = () => {
-
   const [allTasks, setAllTasks] = useState([]);
 
   const [tabs, setTabs] = useState([]);
-  const [filterStatus, setFilterStatus] = useState("All");
+  const [filterStatus, setFilterStatus] = useState('All');
 
   const navigate = useNavigate();
 
@@ -21,7 +20,7 @@ const MyTasks = () => {
     try {
       const response = await axiosInstance.get(API_PATHS.TASKS.GET_ALL_TASKS, {
         params: {
-          status: filterStatus === "All" ? "" : filterStatus,
+          status: filterStatus === 'All' ? '' : filterStatus,
         },
       });
 
@@ -31,18 +30,17 @@ const MyTasks = () => {
       const statusSummary = response.data?.statusSummary || {};
 
       const statusArray = [
-        { label: "All", count: statusSummary.all || 0 },
-        { label: "Pending", count: statusSummary.pendingTasks || 0 },
-        { label: "In Progress", count: statusSummary.inProgressTasks || 0 },
-        { label: "Completed", count: statusSummary.completedTasks || 0 },
+        { label: 'All', count: statusSummary.all || 0 },
+        { label: 'Pending', count: statusSummary.pendingTasks || 0 },
+        { label: 'In Progress', count: statusSummary.inProgressTasks || 0 },
+        { label: 'Completed', count: statusSummary.completedTasks || 0 },
       ];
 
       setTabs(statusArray);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error('Error fetching users:', error);
     }
   };
-
 
   // const handleClick = (taskData) => {
   //   navigate('/admin/create-task', { state: { taskId: taskData._id } });
@@ -64,11 +62,11 @@ const MyTasks = () => {
           <h2 className="text-xl md:text-xl font-medium">My Tasks</h2>
 
           {tabs?.[0]?.count > 0 && (
-              <TaskStatusTabs
-                tabs={tabs}
-                activeTab={filterStatus}
-                setActiveTab={setFilterStatus}
-              />
+            <TaskStatusTabs
+              tabs={tabs}
+              activeTab={filterStatus}
+              setActiveTab={setFilterStatus}
+            />
           )}
         </div>
 
@@ -99,4 +97,3 @@ const MyTasks = () => {
 };
 
 export default MyTasks;
-
